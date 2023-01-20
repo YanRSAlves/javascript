@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programa em Js</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            display: block;
+            flex-direction: row;
+            
+        }
+       
+
+    </style>
+
+</head>
+<body id="body">
+    <div id="mode">
+    <button id="light" style="float:left">light Mode</button>
+    <button class="dark" id="dark" style="float:right">Dark Mode</button>
+    </div>
+    <script>
+        let light = document.getElementById("light")
+        let dark = document.getElementById("dark")
+        let body = document.getElementById("body")
+
+        dark.addEventListener("click", function() {
+            body.style.background = "black"
+        })
+        light.addEventListener("click", function() {
+            body.style.background = "white"
+        })
+    </script>
+</body>
+</html>
