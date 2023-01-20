@@ -9,14 +9,17 @@
         body {
             font: normal 20pt Arial;
         }
+        h1 {
+            color: red;
+        }
     </style>
 </head>
 <body>
     
     <script>
-        var nome = window.prompt("Qual é o seu Nome meu caro?")
-        document.write(`Legal descobrir que <strong>${nome}</strong> tem ${nome.length} letras! <br>`)//nome.length varifica o total de caracteres
-        document.write(` e ele tudo em maiúculo fica ${nome.toUpperCase()} kkkkkkkkkkkkkkkkkkkk <br>`) 
+        var nome = window.prompt("Qual é o seu primerio nome meu caro?")
+        document.write(`<h1>Legal descobrir que <strong>${nome}</strong> tem ${nome.length} letras!</h1> <br>`)//nome.length varifica o total de caracteres
+        document.write(`Olha como fica tudo em maiúsculo: ${nome.toUpperCase()} <br>`) 
     </script>
 
 </body>
