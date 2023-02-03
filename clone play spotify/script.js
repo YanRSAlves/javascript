@@ -8,6 +8,7 @@ const next = document.getElementById('next');
 const previous = document.getElementById('previous');
 const currentProgress = document.getElementById('current-progress');
 const progressContainer = document.getElementById('progress-container');
+const shuffleButton = document.getElementById('shuffle');
 
 //Variáveis 
 const euMeRendo = {
@@ -26,7 +27,9 @@ const UmPedido = {
     file: '2'                                   //Direcionamento Musica 3
 }
 let isPlaying = false;
-const playlist = [euMeRendo, Karolina, UmPedido];    //Direcionamento Musicas
+let isShuffled = false;
+const originalplaylist = [euMeRendo, Karolina, UmPedido];    //Direcionamento Musicas
+let sortedPlaylist = [...originalplaylist];
 let index = 0;
 
 //Funcões
@@ -53,14 +56,14 @@ function playPauseDecider(){
 
 }
 function InitializeSong(){
-    cover.src = `imagens/${playlist[index].file}.webp`;
-    song.src = `songs/${playlist[index].file}.mp3`;
-    songName.innerText = playlist[index].songName;
-    bandName.innerText = playlist[index].artist;
+    cover.src = `imagens/${originalplaylist[index].file}.webp`;
+    song.src = `songs/${originalplaylist[index].file}.mp3`;
+    songName.innerText = originalplaylist[index].songName;
+    bandName.innerText = originalplaylist[index].artist;
 }
 function previousSong(){
     if (index === 0){
-        index = playlist.length - 1;
+        index = originalplaylist.length - 1;
     }else {
     index -= 1;
     //index = index - 1;
@@ -70,7 +73,7 @@ function previousSong(){
     
 }
 function nextSong(){
-    if (index === playlist.length - 1){
+    if (index === originalplaylist.length - 1){
         index = 0;
     }else {
     index += 1;
@@ -91,6 +94,30 @@ function jumpTo(event){
     const jumpToTime = (clickPosition/width)* song.duration;
     song.currentTime = jumpToTime;
 }
+function shuffleArray(preShuffleArray){
+    const size = sortedPlaylist.length;                                    
+    let currentIndex = size - 1;
+    while (currentIndex > 0) {
+        let randomIndex = Math.floor(Math.random()* size);
+        let aux = preShuffleArray[currentIndex];
+        preShuffleArray[currentIndex] = preShuffleArray[randomIndex];
+        preShuffleArray[randomIndex] = aux;
+        currentIndex -= 1;
+    }
+}
+function shuffleButtonClicked(){
+     if(isShuffled === false){
+        isShuffled = true;
+        shuffleArray(sortedPlaylist);
+        shuffleButton.classList.add('button-active');
+     }
+     else {
+        isShuffled = false;
+        sortedPlaylist = [...originalplaylist];
+        shuffleButton.classList.remove('button-active');
+
+     }
+}
 
 
 // Execução de Função
@@ -102,3 +129,4 @@ previous.addEventListener('click', previousSong);
 next.addEventListener('click', nextSong);
 song.addEventListener('timeupdate', updateprogressbar);
 progressContainer.addEventListener('click', jumpTo);
+shuffle.addEventListener('click', shuffleButtonClicked);
